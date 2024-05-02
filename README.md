@@ -18,5 +18,18 @@ palette="/tmp/palette.png"
 filters="scale=320:-1:flags=lanczos"/
 /color z B
 
-/* make sure we wayals alloacate at the least one indirect block pointer /* nbl
+/* make sure we wayals alloacate at the least one indirect block pointer /* nbl#!/bin/bash
+# Based on http://blog.pkh.me/p/21-high-quality-gif-with-ffmpeg.html
+# Requires ffmpeg
+
+filename="${1%.*}"
+palette="/tmp/palette.png"
+filters="scale=320:-1:flags=lanczos"
+
+ffmpeg -v warning -i "$1" -vf "$filters,palettegen" -y $palette
+ffmpeg -v warning -i "$1" -i $palette -lavfi "$filters [x]; [x][1:v] paletteuse" -y "$filename.gif"
+Comment
+ 
+Leave a comment
+<script src="https://gist.github.com/cachapa/aa829bfc717fc4f1d52c568d7ae8521e.js"></script>
 if (ngbl) 
